@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-MAINTAINER Marcin Walerianczyk, mwalerianczyk@atlassian.com
+MAINTAINER Bamboo/Atlassian
 
 ENV BAMBOO_VERSION=6.6.1
 
@@ -15,6 +15,7 @@ ENV BAMBOO_CAPABILITIES=${BAMBOO_AGENT_HOME}/bin/bamboo-capabilities.properties
 
 RUN apt-get update -y && \
     apt-get upgrade -y && \
+    # Please keep in sync java version with JDK capabilities below
     apt-get install -y openjdk-8-jdk && \
     apt-get install -y wget
 
@@ -22,9 +23,9 @@ RUN apt-get update -y && \
 RUN addgroup ${BAMBOO_GROUP} && \
      adduser --home ${BAMBOO_USER_HOME} --ingroup ${BAMBOO_GROUP} --disabled-password ${BAMBOO_USER}
 
-RUN wget --no-check-certificate -O ${AGENT_JAR} ${DOWNLOAD_URL} && \
-    wget --no-check-certificate -O ${BAMBOO_USER_HOME}/bamboo-update-capability.sh https://bitbucket.org/atlassian/bamboo-agent-base/raw/master/bamboo-update-capability.sh && \
-    wget --no-check-certificate -O ${SCRIPT_WRAPPER} https://bitbucket.org/atlassian/bamboo-agent-base/raw/master/runAgent.sh
+RUN wget --no-check-certificate -O ${AGENT_JAR} ${DOWNLOAD_URL}
+COPY bamboo-update-capability.sh  ${BAMBOO_USER_HOME}/bamboo-update-capability.sh 
+COPY runAgent.sh ${SCRIPT_WRAPPER} 
 
 RUN chmod +x ${BAMBOO_USER_HOME}/bamboo-update-capability.sh && \
     chmod +x ${SCRIPT_WRAPPER} && \
@@ -39,4 +40,4 @@ RUN ${BAMBOO_USER_HOME}/bamboo-update-capability.sh "system.jdk.JDK 1.8" /usr/li
 
 WORKDIR ${BAMBOO_USER_HOME}
 
-CMD ${SCRIPT_WRAPPER}
+ENTRYPOINT ["./runAgent.sh"]
