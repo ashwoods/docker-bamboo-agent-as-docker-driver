@@ -15,7 +15,7 @@ ENV BAMBOO_CAPABILITIES=${BAMBOO_AGENT_HOME}/bin/bamboo-capabilities.properties
 
 RUN apt-get update -y && \
     apt-get upgrade -y && \
-    # Please keep in sync java version with JDK capabilities below
+    # please keep Java version in sync with JDK capabilities below
     apt-get install -y openjdk-8-jdk && \
     apt-get install -y wget
 
