@@ -1,10 +1,9 @@
 # README #
 
-TODO: Replace image name __IMAGE_NAME__
 
 ## HOW TO RUN ##
 
-	docker run -d __IMAGE_NAME__ <<bamboo-url>>
+	docker run -d atlassian/bamboo-agent-base:latest <<bamboo-url>>
 	
 <<bamboo-url>> is required for run image.
 
