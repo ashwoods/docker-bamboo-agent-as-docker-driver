@@ -15,7 +15,7 @@ if [  $# -le 1 ]; then
 fi 
 
 if [ -z "$3" ]; then
-	propertiesFilePath=~/bamboo-agent-home/bin/bamboo-capabilities.properties
+	propertiesFilePath=~/init-bamboo-capabilities.properties
 else
 	propertiesFilePath=$3
 fi
