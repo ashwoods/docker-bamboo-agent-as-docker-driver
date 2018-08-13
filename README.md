@@ -1,5 +1,3 @@
-![Atlassian Bamboo](https://www.atlassian.com/dam/wac/legacy/bamboo_logo_landing.png)
-
 A Bamboo Agent is a service that can run job builds. Each agent has a defined set of capabilities and can run builds only for jobs whose requirements match the agent's capabilities.
 
 To learn more about Bamboo, see: https://www.atlassian.com/software/bamboo
@@ -25,11 +23,11 @@ For the agent’s home directory which is used for storing agent’s configurati
 	
 3. Verify if your remote agent has registered itself. Go back to the **Administration > Agents console**.
 
-## Security token
+### Security token
 
 If you have security token verification enabled on your server, you can pass the token to the agent via the `SECURITY_TOKEN` environment variable in the docker run command.
 
-## JVM Configuration
+### JVM Configuration
 
 If you need to override Bamboo agent's default memory configuration or pass additional JVM arguments, use the `VM_OPTS` environment variable.
 
