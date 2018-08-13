@@ -53,7 +53,7 @@ Remote agents are updated automatically, so you don’t need to worry about it d
 
 # Issue tracker
 
-* You can view know issues [here](https://jira.atlassian.com/secure/RapidBoard.jspa?rapidView=1775&projectKey=BAM).
+* You can view know issues [here](https://jira.atlassian.com/projects/BAM/issues/filter=allissues).
 * Please contact our support if you encounter any problems with this Dockerfile.
 
 # Support
