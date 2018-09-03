@@ -1,6 +1,7 @@
 A Bamboo Agent is a service that can run job builds. Each agent has a defined set of capabilities and can run builds only for jobs whose requirements match the agent's capabilities.
-
 To learn more about Bamboo, see: https://www.atlassian.com/software/bamboo
+
+If you are looking for **Bamboo Server Docker Image** it can be found [here](https://hub.docker.com/r/atlassian/bamboo-server/).
 
 # Overview
 
@@ -13,8 +14,10 @@ Note that Bamboo Agent Docker Image does not include a Bamboo server.
 For the agent’s home directory which is used for storing agent’s configuration and builds data, we strongly recommend mounting a host directory as a data volume or a named volume:
 	
 	docker volume create --name bambooAgentVolume
+	
+Make sure your Bamboo server is running and has remote agents support enabled. To enable it:
 
-1. Make sure your Bamboo server is running and has remote agents support enabled. To enable it, go to **Administration > Agents console**.
+1. Go to **Administration > Agents console**.
 2. Start the Bamboo Agent container:
 
 		docker run -v bambooAgentVolume:/home/bamboo/bamboo-agent-home --name="bambooAgent" -d atlassian/bamboo-agent-base <<bamboo-server-url>>
