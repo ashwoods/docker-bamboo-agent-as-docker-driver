@@ -17,8 +17,10 @@ RUN apt-get update -y && \
     apt-get upgrade -y && \
     # please keep Java version in sync with JDK capabilities below
     apt-get install -y openjdk-8-jdk && \
-    apt-get install -y wget
-
+    apt-get install -y wget 
+    
+RUN apt-get update -y && \
+    apt-get install -y apt-transport-https ca-certificates curl git make 
 
 RUN addgroup ${BAMBOO_GROUP} && \
      adduser --home ${BAMBOO_USER_HOME} --ingroup ${BAMBOO_GROUP} --disabled-password ${BAMBOO_USER}
@@ -35,8 +37,18 @@ RUN chown -R ${BAMBOO_USER} ${BAMBOO_USER_HOME}
 
 USER ${BAMBOO_USER}
 
-RUN curl -L get.docker.com | sh
 
+ENV DOWNLOAD_URL="https://download.docker.com"
+ENV APT_URL="deb [arch=arm64] ${DOWNLOAD_URL}/linux/ubuntu bionic edge"
+
+RUN curl -fsSL ${DOWNLOAD_URL}/linux/ubuntu/gpg | apt-key add -qq - >/dev/null
+RUN cat ${APT_URL} > /etc/apt/sources.list.d/docker.list
+
+RUN apt-get update -yq && \
+    apt-get install -y -qq --no-install-recommends docker-ce
+
+
+RUN ${BAMBOO_USER_HOME}/bamboo-update-capability.sh "system.arch" aarch64
 RUN ${BAMBOO_USER_HOME}/bamboo-update-capability.sh "system.docker.executable" /usr/bin/docker
 RUN ${BAMBOO_USER_HOME}/bamboo-update-capability.sh "system.git.executable" /usr/bin/git
 RUN ${BAMBOO_USER_HOME}/bamboo-update-capability.sh "system.jdk.JDK 1.8" /usr/lib/jvm/java-1.8-openjdk/bin/java
