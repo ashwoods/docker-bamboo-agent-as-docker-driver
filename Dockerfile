@@ -35,7 +35,13 @@ RUN chown -R ${BAMBOO_USER} ${BAMBOO_USER_HOME}
 
 USER ${BAMBOO_USER}
 
+RUN curl -L get.docker.com | sh
+
+RUN ${BAMBOO_USER_HOME}/bamboo-update-capability.sh "system.docker.executable" /usr/bin/docker
+RUN ${BAMBOO_USER_HOME}/bamboo-update-capability.sh "system.git.executable" /usr/bin/git
 RUN ${BAMBOO_USER_HOME}/bamboo-update-capability.sh "system.jdk.JDK 1.8" /usr/lib/jvm/java-1.8-openjdk/bin/java
+
+
 
 
 WORKDIR ${BAMBOO_USER_HOME}
