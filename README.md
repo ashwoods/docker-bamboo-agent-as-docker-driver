@@ -1,3 +1,6 @@
+The Docker image is based on the atlassian bamboo agent docker image, adding docker and a few tools for running docker containers on the host.
+
+
 A Bamboo Agent is a service that can run job builds. Each agent has a defined set of capabilities and can run builds only for jobs whose requirements match the agent's capabilities.
 To learn more about Bamboo, see: https://www.atlassian.com/software/bamboo
 
